@@ -1,5 +1,6 @@
 
-let player = {name:"Tunde",chips:"150"}
+let player = {name:"Tunde",chips:10}
+let state = {win:0, loss:0}
 let isAlive = false
 let cards = []
 let sum = 0
@@ -9,9 +10,11 @@ let messageEl = document.getElementById('message-el')
 let sumEl = document.getElementById('sum-el')
 let cardEl = document.getElementById('cards-el')
 let playerEl = document.getElementById('player-el')
+let countStoreEl = document.getElementById('store-count') 
+let winCount = document.getElementById('win-count')
+let lossCount = document.getElementById('loss-count') 
 
 
-playerEl.textContent = player.name + ": $" + player.chips
 
 function getRandomCard() {
     let randomNumber = Math.floor(Math.random() * 13 + 1)
@@ -25,34 +28,46 @@ function getRandomCard() {
     }
 }
 
-function startGame() {
+// function startGame() {
 
-    let firstCard = getRandomCard()
-    let secondCard = getRandomCard()
-    cards = [firstCard, secondCard]
-    sum = firstCard + secondCard
-    isAlive = true
-      renderGame()
-    }
+//     let firstCard = getRandomCard()
+//     let secondCard = getRandomCard()
+//     cards = [firstCard, secondCard]
+//     sum = firstCard + secondCard
+//     isAlive = true
+//       renderGame()
+//     }
 
 
     function startGame() {
+
+      if(player.chips === 0){
+        let firstCard = getRandomCard()
+        let secondCard = getRandomCard()
+        cards = [firstCard, secondCard]
+        sum = firstCard + secondCard
+        isAlive = true
+          renderGame()
+      }
+      
         let firstCard = getRandomCard();
         let secondCard = getRandomCard();
         cards = [firstCard, secondCard];
         sum = firstCard + secondCard;
         isAlive = true;
         renderGame();
+        playerEl.textContent = `${player.name} : $${player.chips}`
+        winCount.textContent = `Rounds won: ${state.win}`
+        lossCount.textContent = `Rounds lost: ${state.loss}`
+        
           }
 
       
 
 function renderGame() {
-
 cardEl.textContent = "cards: "
 for (let i = 0; i < cards.length; i++) {
     cardEl.textContent += cards[i] + " "
-    console.log(cardEl.textContent)
 }
 
   sumEl.textContent = "Sum: " + sum
@@ -61,14 +76,15 @@ for (let i = 0; i < cards.length; i++) {
   }else if(sum === 21){
     message = 'You got blackjack!!!'
     hasBlackJack = true
+    player.chips += 10
+    state.win += 1
   }else{
     message = 'You are out of the game!!!'
     isAlive = false
+    player.chips -= 10
+    state.loss += 1
   }
-  console.log(message)
-  console.log(hasBlackJack)
-  console.log(isAlive)
-  
+                 
   messageEl.textContent = message
 
 }
@@ -83,5 +99,10 @@ if(isAlive && !hasBlackJack){
     cards.push(card)
     renderGame()
 }
+hasBlackJack = false
+}
 
+
+function closeRound() {
+  
 }
