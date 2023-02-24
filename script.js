@@ -1,5 +1,5 @@
 
-let player = {name:"Tunde",chips:10}
+let player = {name:"Tunde",chips:150}
 let state = {win:0, loss:0}
 let isAlive = false
 let cards = []
