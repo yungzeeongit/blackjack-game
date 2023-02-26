@@ -1,5 +1,5 @@
 
-let player = {name:"Tunde",chips:150}
+let player = {name:"Tunde",chips:20}
 let state = {win:0, loss:0}
 let isAlive = false
 let cards = []
@@ -41,25 +41,35 @@ function getRandomCard() {
 
     function startGame() {
 
-      if(player.chips === 0){
-        let firstCard = getRandomCard()
-        let secondCard = getRandomCard()
-        cards = [firstCard, secondCard]
-        sum = firstCard + secondCard
-        isAlive = true
-          renderGame()
-      }
+      if(player.chips > 0){
+        // let firstCard = getRandomCard()
+        // let secondCard = getRandomCard()
+        // cards = [firstCard, secondCard]
+        // sum = firstCard + secondCard
+        // isAlive = true
+        //   renderGame()
+      
       
         let firstCard = getRandomCard();
         let secondCard = getRandomCard();
         cards = [firstCard, secondCard];
         sum = firstCard + secondCard;
         isAlive = true;
-        renderGame();
-        playerEl.textContent = `${player.name} : $${player.chips}`
-        winCount.textContent = `Rounds won: ${state.win}`
-        lossCount.textContent = `Rounds lost: ${state.loss}`
         
+       
+      }else if(player.chips <= 0){
+  player = {name:"Tunde",chips:20}
+ state = {win:0, loss:0}
+ isAlive = false
+ cards = []
+ sum = 0
+ message = ""
+ hasBlackJack = false
+      }
+      renderGame();
+      playerEl.textContent = `${player.name} : $${player.chips}`
+      winCount.textContent = `Rounds won: ${state.win}`
+      lossCount.textContent = `Rounds lost: ${state.loss}`
           }
 
       
