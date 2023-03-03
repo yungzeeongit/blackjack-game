@@ -1,5 +1,5 @@
 
-let player = {name:"Tunde",chips:20}
+let player = {name:"Tunde",chips:150}
 let state = {win:0, loss:0}
 let isAlive = false
 let cards = []
@@ -13,7 +13,18 @@ let playerEl = document.getElementById('player-el')
 let countStoreEl = document.getElementById('store-count') 
 let winCount = document.getElementById('win-count')
 let lossCount = document.getElementById('loss-count') 
+const startBtn = document.getElementById('start-btn')
 
+
+/* eventlisteners */
+
+startBtn.addEventListener('click',function() {
+  if (cardEl.textContent === `Cards:` || messageEl.textContent === `You are out of the game!!!` || messageEl.textContent === `You got blackjack!!!`)
+    startGame()
+})
+
+
+/* eventlisteners */
 
 
 function getRandomCard() {
@@ -28,26 +39,12 @@ function getRandomCard() {
     }
 }
 
-// function startGame() {
 
-//     let firstCard = getRandomCard()
-//     let secondCard = getRandomCard()
-//     cards = [firstCard, secondCard]
-//     sum = firstCard + secondCard
-//     isAlive = true
-//       renderGame()
-//     }
 
 
     function startGame() {
 
       if(player.chips > 0){
-        // let firstCard = getRandomCard()
-        // let secondCard = getRandomCard()
-        // cards = [firstCard, secondCard]
-        // sum = firstCard + secondCard
-        // isAlive = true
-        //   renderGame()
       
       
         let firstCard = getRandomCard();
@@ -58,7 +55,7 @@ function getRandomCard() {
         
        
       }else if(player.chips <= 0){
-  player = {name:"Tunde",chips:20}
+player = {name:"Tunde",chips:150 }
  state = {win:0, loss:0}
  isAlive = false
  cards = []
